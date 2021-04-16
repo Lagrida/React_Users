@@ -1,24 +1,28 @@
-import logo from './logo.svg';
+import React from 'react';
+import {BrowserRouter as Router} from 'react-router-dom';
+import Routers from './router';
+import Header from './views/Header'
+import { ThemeProvider } from '@material-ui/core';
+import theme from './theme';
+import GlobalStyles from './GlobalStyles';
+import AuthenticationService from './AuthenticationService';
+
 import './App.css';
+import 'react-perfect-scrollbar/dist/css/styles.css';
 
 function App() {
+  //useEffect(() => {
+    //axios.defaults.headers.common['Authorization'] = (AuthenticationService.getToken() != '' ? 'Bearer ' : '') + AuthenticationService.getToken();
+    AuthenticationService.AddBearerHeader();
+  //}, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+        <Router>
+          <GlobalStyles />
+          <Header />
+          <Routers />
+        </Router>
+    </ThemeProvider>
   );
 }
 
